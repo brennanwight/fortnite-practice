@@ -1,4 +1,4 @@
-<!--The content below is only a placeholder and can be replaced.-->
+<!--The content below is for practice.-->
 <div>
   <button (click)="show_News()">News</button>
   <button (click)="show_Stats()">Brenz Stats</button>
@@ -8,7 +8,7 @@
 <h1>Fortnite News</h1>
 <div>
   <ul *ngFor = "let i = index; let title of response.data | keyvalue">
-    <li>{{ response.data[i].title }}</li>
+    <li class="news_item">{{ response.data[i].title }}</li>
   <!-- <li *ngFor = "let i = index; let title of response.data | keyvalue" [attr.data-index]="i">{{ response.data[i].title }}</li> -->
     <ul class="lists">
       <li>{{ response.data[i].body }}</li>

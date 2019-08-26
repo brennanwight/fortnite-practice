@@ -14,7 +14,7 @@ export class AppComponent {
   response: any;
   responseUserId: any;
   responseStats: any;
-  responseItemShop: any;
+  responseItemShop: any; 
 
   constructor(private http: HttpClient) {
     
@@ -44,6 +44,7 @@ export class AppComponent {
       headers: new HttpHeaders()
         .set('Authorization', '4b351fadd63fbfa34b559e5e329a1217')
     }
+
     this.http.get("https://fortnite-api.theapinetwork.com/br_motd/get", header)
     .subscribe((response1) => {
       this.response = response1;
