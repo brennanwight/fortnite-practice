@@ -1,20 +1,58 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div>
+  <button (click)="show_News()">News</button>
+  <button (click)="show_Stats()">Brenz Stats</button>
+  <button (click)="show_ItemShop()">Item Shop</button>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div [hidden]="!showNews">
+<h1>Fortnite News</h1>
+<div>
+  <ul *ngFor = "let i = index; let title of response.data | keyvalue">
+    <li>{{ response.data[i].title }}</li>
+  <!-- <li *ngFor = "let i = index; let title of response.data | keyvalue" [attr.data-index]="i">{{ response.data[i].title }}</li> -->
+    <ul>
+      <li>{{ response.data[i].body }}</li>
+        <ul>
+          <li><img src="{{ response.data[i].image }}" style="width:300px;height:150px;"></li>
+        </ul>
+      <!-- <li *ngFor = "let b = index; let body of response.data | keyvalue" [attr.data-index]="b">{{ response.data[b].body }}</li> -->
+    </ul>
+  </ul>
+</div>
+</div>
+<div [hidden]="!showStats">
+  <h1>Brenz Stats</h1>
+  <h2>Follow me on twitch // twitch.tv/brenz</h2>
+  <div>
+    <ul>
+      <li>Regular Duos</li>
+        <ul>
+          <li>Eliminations: {{responseStats.data.stats.gamepad[1].entries[0].stats.kills }}</li>
+          <li>Wins: {{ responseStats.data.stats.gamepad[1].entries[0].stats.placetop1 }}</li>
+          <li>Players Outlived: {{ responseStats.data.stats.gamepad[1].entries[0].stats.playersoutlived }}</li>
+        </ul>
+      <li>Regular Squads</li>
+        <ul>
+          <li>Eliminations: {{responseStats.data.stats.gamepad[10].entries[0].stats.kills }}</li>
+          <li>Wins: {{ responseStats.data.stats.gamepad[10].entries[0].stats.placetop1 }}</li>
+          <li>Players Outlived: {{ responseStats.data.stats.gamepad[10].entries[0].stats.playersoutlived }}</li>
+        </ul>       
 
+  </ul>
+  </div>
+</div>
+<div [hidden]="!showItemShop">
+  <h1>Item Shop</h1>
+  <ul *ngFor = "let i = index; let title of responseItemShop.data | keyvalue">
+    <li>{{ responseItemShop.data[i].item.name }} {{ responseItemShop.data[i].store.cost }} {{ responseItemShop.data[i].item.obtained_type | uppercase }}</li>
+      <ul>
+        <li><img src="{{ responseItemShop.data[i].item.images.featured }}" style="width:300px;height:300px;"></li>
+        <li>{{ responseItemShop.data[i].item.description }}</li>
+      </ul>
+  </ul>
+
+</div>
+
+
+<!-- style="width:50px;height:50px;" -->
+<!--  [attr.data-index]="i" -->
