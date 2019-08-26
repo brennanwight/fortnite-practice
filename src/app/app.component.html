@@ -8,7 +8,7 @@
 <h1>Fortnite News</h1>
 <div>
   <ul *ngFor = "let i = index; let title of response.data | keyvalue">
-    <li class="news_item">{{ response.data[i].title }}</li>
+    <li>{{ response.data[i].title }}</li>
   <!-- <li *ngFor = "let i = index; let title of response.data | keyvalue" [attr.data-index]="i">{{ response.data[i].title }}</li> -->
     <ul class="lists">
       <li>{{ response.data[i].body }}</li>
