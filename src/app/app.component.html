@@ -10,9 +10,9 @@
   <ul *ngFor = "let i = index; let title of response.data | keyvalue">
     <li>{{ response.data[i].title }}</li>
   <!-- <li *ngFor = "let i = index; let title of response.data | keyvalue" [attr.data-index]="i">{{ response.data[i].title }}</li> -->
-    <ul>
+    <ul class="lists">
       <li>{{ response.data[i].body }}</li>
-        <ul>
+        <ul class="lists">
           <li><img src="{{ response.data[i].image }}" style="width:300px;height:150px;"></li>
         </ul>
       <!-- <li *ngFor = "let b = index; let body of response.data | keyvalue" [attr.data-index]="b">{{ response.data[b].body }}</li> -->
@@ -45,9 +45,15 @@
   <h1>Item Shop</h1>
   <ul *ngFor = "let i = index; let title of responseItemShop.data | keyvalue">
     <li>{{ responseItemShop.data[i].item.name }} {{ responseItemShop.data[i].store.cost }} {{ responseItemShop.data[i].item.obtained_type | uppercase }}</li>
-      <ul>
-        <li><img src="{{ responseItemShop.data[i].item.images.featured }}" style="width:300px;height:300px;"></li>
-        <li>{{ responseItemShop.data[i].item.description }}</li>
+      <ul class="lists">
+        <li *ngIf="responseItemShop.data[i].item.images.featured; else elseBlock"><img src="{{ responseItemShop.data[i].item.images.featured }}" style="width:300px;height:300px;"></li>
+        <ng-template #elseBlock>
+          <li><img src="{{ responseItemShop.data[i].item.images.background }}" style="width:300px;height:300px;"></li>
+          </ng-template>
+        <li *ngIf="responseItemShop.data[i].item.description; else elseBlock2">{{ responseItemShop.data[i].item.description }}</li>
+        <ng-template #elseBlock2>
+            <li>{{ responseItemShop.data[i].item.rarity | titlecase}}  {{ responseItemShop.data[i].item.type | titlecase}}</li>
+        </ng-template>
       </ul>
   </ul>
 
